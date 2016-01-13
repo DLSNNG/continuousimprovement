@@ -16,7 +16,7 @@ AddDepartmentForm = React.createClass({
 	},
 	render() {
 		return (
-			<div className="container">
+			<div>
 				<form className="add-department-form" onSubmit={this.addDepartment} >
 					<h3>Add Department</h3>
 					<input

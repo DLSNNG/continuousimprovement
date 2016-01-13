@@ -1,1 +1,50 @@
 /* CSS declarations go here */
+.selected {
+	background-color: steelblue;
+	color: #fff;
+}
+
+.scroll-list-wrapper {
+	padding: 10px;
+	background-color: #e1e1e1;
+}
+
+.scroll-list {
+	height: 201px;
+	overflow-y: scroll;
+}
+
+.scroll-list li:hover {
+	cursor: pointer;
+}
+
+.filter-list-input {
+	width:100%;
+	height: 40px;
+	padding-left: 25px;
+}
+
+
+.filter-list-input::-webkit-input-placeholder { /* Safari, Chrome and Opera */
+  /*background-color: #9EF0E8;*/
+}
+
+.filter-list-input:-moz-placeholder { /* Firefox 18- */
+  /*background-color: #9EF0E8;*/
+}
+
+.filter-list-input::-moz-placeholder{ /* Firefox 19+ */
+  /*background-color: #9EF0E8;*/
+}
+
+.filter-list-input:-ms-input-placeholder { /* IE 10+ */
+  /*background-color: #9EF0E8;*/
+}
+
+.filter-list-input::-ms-input-placeholder { /* Edge */
+  /*background-color: #9EF0E8;*/
+}
+
+.filter-list-input:placeholder-shown { /* Standard one last! */
+  /*background-color: #9EF0E8;*/
+}

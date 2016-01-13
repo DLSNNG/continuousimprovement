@@ -17,7 +17,7 @@ AddCategoryForm = React.createClass({
 	},
 	render() {
 		return (
-			<div className="container">
+			<div>
 				<form className="add-category-form" onSubmit={this.addCategory} >
 					<h3>Add Category</h3>
 					<input
