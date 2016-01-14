@@ -48,3 +48,15 @@
 .filter-list-input:placeholder-shown { /* Standard one last! */
   /*background-color: #9EF0E8;*/
 }
+
+.content-editable {
+	padding: 10px;
+}
+
+.hover-show {
+	display:none;
+}
+
+div:hover > .hover-show {
+	display:block;
+}

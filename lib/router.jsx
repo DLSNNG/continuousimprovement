@@ -16,6 +16,12 @@ FlowRouter.route('/categories', {
 	}
 });
 
+FlowRouter.route('/categories/:categoryId', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { content: <CategoryDetails categoryId={params.categoryId} /> });
+	}
+});
+
 FlowRouter.route('/tickets', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { content: <AddTicketsPage /> });

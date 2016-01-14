@@ -5,7 +5,8 @@ AddCategoriesPage = React.createClass({
 				<AddCategoryForm />
 				<CollectionList 
 					collection="Categories"
-					display="name" />
+					display="name" 
+					baseURL="/categories/"/>
 			</div>
 		)
 	}

@@ -5,12 +5,13 @@ CollectionListSelect = React.createClass({
 		collection: React.PropTypes.string,
 		display: React.PropTypes.string,
 		value: React.PropTypes.string,
-		searchString: React.PropTypes.string
+		searchString: React.PropTypes.string,
+		selectedItems: React.PropTypes.array
 	},
 
 	getInitialState() {
 		return {
-			selectedItems: []
+			selectedItems: this.props.selectedItems || []
 		}
 	},
 
