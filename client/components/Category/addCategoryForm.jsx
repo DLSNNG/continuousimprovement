@@ -29,11 +29,13 @@ AddCategoryForm = React.createClass({
 						type="text"
 						ref="catDescription"
 						placeholder="Category Description" />
-					<CollectionListSelect
-						ref="departmentIds"
-						collection="Departments"
-						display="name" 
-						value="_id" />
+					<div className="scroll-list">
+						<CollectionListSelect
+							ref="departmentIds"
+							collection="Departments"
+							display="name" 
+							value="_id" />
+					</div>
 					<input
 						type="submit"
 						value="Add Category" />

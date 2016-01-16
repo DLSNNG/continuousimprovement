@@ -5,7 +5,8 @@ AddDepartmentsPage = React.createClass({
 				<AddDepartmentForm />
 				<CollectionList
 					collection="Departments"
-					display="name" />
+					display="name" 
+					baseURL="/departments/" />
 			</div>
 		)
 	}

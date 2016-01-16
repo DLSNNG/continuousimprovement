@@ -10,6 +10,12 @@ FlowRouter.route('/departments', {
 	}
 });
 
+FlowRouter.route('/departments/:departmentId', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { content: <DepartmentDetails departmentId={params.departmentId} /> });
+	}
+});
+
 FlowRouter.route('/categories', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { content: <AddCategoriesPage /> });
@@ -25,6 +31,12 @@ FlowRouter.route('/categories/:categoryId', {
 FlowRouter.route('/tickets', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { content: <AddTicketsPage /> });
+	}
+});
+
+FlowRouter.route('/tickets/:ticketId', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { content: <TicketDetails ticketId={params.ticketId} /> });
 	}
 });
 

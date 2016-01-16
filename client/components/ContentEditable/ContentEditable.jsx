@@ -28,7 +28,8 @@ ContentEditable = React.createClass({
 	},
 
 	getValue() {
-		return this.refs.display.innerHTML;
+		console.log("test", this.refs.display.innerText);
+		return this.refs.display.innerText;
 	},
 
 	render() {

@@ -1,27 +1,26 @@
-CategoryDetails = React.createClass({
+DepartmentDetails = React.createClass({
 
 	propTypes: {
-		categoryId: React.PropTypes.string		
+		departmentId: React.PropTypes.string		
 	},
 	
 	mixins: [ReactMeteorData],
 
 	getMeteorData() {
 		return {
-			category: Collections.Categories.findOne({ _id: this.props.categoryId })
+			department: Collections.Departments.findOne({ _id: this.props.departmentId })
 		}
 	},
 
 	saveUpdates() {
 		var doc = {
-			_id: this.data.category._id,
+			_id: this.data.department._id,
 			name: this.refs.name.getValue().trim(),
-			description: this.refs.description.getValue().trim(),
-			departmentIds: this.refs.departmentIds.getSelected()
+			members: this.refs.members.getSelected()
 		}
 
-		var category = new Models.Category(doc);
-		var status = category.save();
+		var department = new Models.Department(doc);
+		var status = department.save();
 		if(status.passes) { this.setSuccessText("Update saved successfully"); }
 		else{ this.setErrorText(status.error); }
 	},
@@ -37,7 +36,6 @@ CategoryDetails = React.createClass({
 	},
 
 	render() {
-		var name = this.data.category.name;
 		//need to refactor error/success texts later to be its own component
 		return (
 			<div className="container">
@@ -46,22 +44,17 @@ CategoryDetails = React.createClass({
 				<h3>
 					<ContentEditable
 						ref="name"
-						display={this.data.category.name} />
+						display={this.data.department.name} />
 				</h3>
 				<hr />
-				<div className="well">
-					<ContentEditable
-						ref="description"
-						display={this.data.category.description} />
-				</div>
-				<h4>Departments</h4>
+				<h4>Members</h4>
 				<div className="scroll-list">
 					<CollectionListSelect
-						ref="departmentIds"
-						collection="Departments"
-						display="name"
+						ref="members"
+						collection="Users"
+						display="username"
 						value="_id"
-						selectedItems={this.data.category.departmentIds} />
+						selectedItems={this.data.department.members} />
 				</div>
 				<input type="submit" value="Save Changes" onClick={this.saveUpdates} />
 			</div>

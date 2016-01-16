@@ -5,7 +5,8 @@ AddTicketsPage = React.createClass({
 				<AddTicketForm />
 				<CollectionList
 					collection="Tickets"
-					display="title" />
+					display="title"
+					baseURL="/tickets/" />
 			</div>
 		)
 	}
