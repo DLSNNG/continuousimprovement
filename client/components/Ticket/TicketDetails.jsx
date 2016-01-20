@@ -28,6 +28,15 @@ TicketDetails = React.createClass({
 		else{ this.setErrorText(status.error); }
 	},
 
+	deleteTicket() {
+		var doc = this.data.ticket;
+		var ticket = new Models.Ticket(doc);
+		var status = ticket.remove();
+		if(status.passes) { FlowRouter.go('/tickets'); }
+		else { this.setErrorText(status.error); }
+
+	},
+
 	setErrorText(text) {
 		var error = ReactDOM.findDOMNode(this.refs.errorText);
 			error.innerHTML = text;
@@ -43,6 +52,9 @@ TicketDetails = React.createClass({
 		//and add moment for dates
 		return (
 			<div className="container">
+				<div className="row">
+					<h1 onClick={this.deleteTicket} className="glyphicon glyphicon-remove pull-right text-danger"></h1>
+				</div>
 				<div ref="errorText" className="bg-danger"></div>
 				<div ref="successText" className="bg-success"></div>
 				<h3>
