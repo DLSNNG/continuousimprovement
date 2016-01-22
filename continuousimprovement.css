@@ -60,3 +60,21 @@
 div:hover > .hover-show {
 	display:block;
 }
+
+.react-modal {
+	right: 20%;
+	left: 20%;
+	margin-top: 100px;
+	background-color: #fff;
+	padding: 10px;
+	padding-bottom: 30px;
+	position: absolute;
+	float: left;
+}
+
+@media(max-width: 400px) {
+	.react-modal {
+		margin-right: 7%;
+		margin-left: 7%;
+	}
+}

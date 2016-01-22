@@ -28,6 +28,14 @@ TicketDetails = React.createClass({
 		else{ this.setErrorText(status.error); }
 	},
 
+	showModal() {
+		this.refs.modal.showModal();
+	},
+
+	hideModal() {
+		this.refs.modal.hideModal();
+	},
+
 	deleteTicket() {
 		var doc = this.data.ticket;
 		var ticket = new Models.Ticket(doc);
@@ -53,7 +61,14 @@ TicketDetails = React.createClass({
 		return (
 			<div className="container">
 				<div className="row">
-					<h1 onClick={this.deleteTicket} className="glyphicon glyphicon-remove pull-right text-danger"></h1>
+					<h1 onClick={this.showModal} className="glyphicon glyphicon-remove pull-right text-danger"></h1>
+					<ModalToggle ref="modal">
+						<div className="col-xs-12">
+							<h3>Are you sure you want to delete this ticket?</h3>
+							<button className="btn btn-danger" onClick={this.deleteTicket}>Delete</button>
+							<button className="btn btn-caution" onClick={this.hideModal}>Cancel</button>
+						</div>
+					</ModalToggle>
 				</div>
 				<div ref="errorText" className="bg-danger"></div>
 				<div ref="successText" className="bg-success"></div>
