@@ -1,7 +1,7 @@
 ModalToggle = React.createClass({
 
 	propTypes: {
-		showInitially: React.PropTypes.bool.isRequired
+		showInitially: React.PropTypes.bool
 	},
 	
 	getInitialState: function() {

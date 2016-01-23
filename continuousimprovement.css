@@ -72,9 +72,9 @@ div:hover > .hover-show {
 	float: left;
 }
 
-@media(max-width: 400px) {
+@media(max-width: 700px) {
 	.react-modal {
-		margin-right: 7%;
-		margin-left: 7%;
+		right: 10px;
+		left: 10px;
 	}
 }

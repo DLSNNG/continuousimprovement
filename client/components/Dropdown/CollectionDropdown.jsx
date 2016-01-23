@@ -17,6 +17,22 @@ CollectionDropdown = React.createClass({
 		}
 	},
 
+	getInitialState() {
+		var selected = this.props.selected || "";
+		return {
+			selected: selected
+		}
+	},
+
+	updateSelected(event) {
+		var selected = event.target.value;
+		this.setState({ selected: selected });
+	},
+
+	getValue() {
+		return this.state.selected;
+	},
+
 	render() {
 		return (
 			<Dropdown 
@@ -25,7 +41,9 @@ CollectionDropdown = React.createClass({
 				display={this.props.display}
 				name={this.props.collection}
 				value={this.props.value} 
-				placeholder={this.props.placeholder} />
+				onChange={this.updateSelected}
+				placeholder={this.props.placeholder}
+				selected={this.props.selected} />
 		)
 	}
 });

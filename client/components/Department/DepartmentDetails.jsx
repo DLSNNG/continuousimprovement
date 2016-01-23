@@ -25,6 +25,14 @@ DepartmentDetails = React.createClass({
 		else{ this.setErrorText(status.error); }
 	},
 
+	deleteDepartment() {
+		var doc = this.data.department;
+		var department = new Models.Department(doc);
+		var status = department.remove();
+		if(status.passes) { FlowRouter.go('/departments'); }
+		else { this.setErrorText(status.error); }
+	},
+
 	setErrorText(text) {
 		var error = ReactDOM.findDOMNode(this.refs.errorText);
 			error.innerHTML = text;
@@ -39,6 +47,10 @@ DepartmentDetails = React.createClass({
 		//need to refactor error/success texts later to be its own component
 		return (
 			<div className="container">
+				<ModalDelete
+					docName="Department"
+					deleteDoc={this.deleteDepartment} />
+
 				<div ref="errorText" className="bg-danger"></div>
 				<div ref="successText" className="bg-success"></div>
 				<h3>

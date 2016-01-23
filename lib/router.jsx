@@ -40,6 +40,19 @@ FlowRouter.route('/tickets/:ticketId', {
 	}
 });
 
+FlowRouter.route('/ticketStatusOptions', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { content: <AddTicketStatusOptionsPage /> });
+	}
+});
+
+FlowRouter.route('/ticketStatusOptions/:ticketStatusOptionId', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { content: <TicketStatusOptionDetails 
+														ticketStatusOptionId={params.ticketStatusOptionId} /> });
+	}
+});
+
 FlowRouter.route('/users', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { content: <AddUsersPage /> });

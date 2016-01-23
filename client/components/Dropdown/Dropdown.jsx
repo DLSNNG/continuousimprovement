@@ -6,7 +6,9 @@ Dropdown = React.createClass({
 		value: React.PropTypes.string,
 		keyToUse: React.PropTypes.string,
 		name: React.PropTypes.string,
-		placeholder: React.PropTypes.string
+		placeholder: React.PropTypes.string,
+		selected: React.PropTypes.string,
+		onChange: React.PropTypes.func
 	},
 
 	renderPlaceholder() {
@@ -26,7 +28,7 @@ Dropdown = React.createClass({
 
 	render() {
 		return (
-			<select name={this.props.name} defaultValue="">
+			<select onChange={this.props.onChange} name={this.props.name} defaultValue={this.props.selected || ""}>
 				{this.renderPlaceholder()}
 				{this.renderOptions()}
 			</select>

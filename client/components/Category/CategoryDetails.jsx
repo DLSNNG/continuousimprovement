@@ -26,6 +26,14 @@ CategoryDetails = React.createClass({
 		else{ this.setErrorText(status.error); }
 	},
 
+	deleteCategory() {
+		var doc = this.data.category;
+		var category = new Models.Category(doc);
+		var status = category.remove();
+		if(status.passes) { FlowRouter.go('/categories'); }
+		else { this.setErrorText(status.error); }
+	},
+
 	setErrorText(text) {
 		var error = ReactDOM.findDOMNode(this.refs.errorText);
 			error.innerHTML = text;
@@ -41,6 +49,10 @@ CategoryDetails = React.createClass({
 		//need to refactor error/success texts later to be its own component
 		return (
 			<div className="container">
+				<ModalDelete
+					docName="Category"
+					deleteDoc={this.deleteCategory} />
+
 				<div ref="errorText" className="bg-danger"></div>
 				<div ref="successText" className="bg-success"></div>
 				<h3>
@@ -49,21 +61,26 @@ CategoryDetails = React.createClass({
 						display={this.data.category.name} />
 				</h3>
 				<hr />
-				<div className="well">
-					<ContentEditable
-						ref="description"
-						display={this.data.category.description} />
+				<div className="col-md-4 col-md-push-8">
+					<h4>Departments</h4>
+					<div className="scroll-list">
+						<CollectionListSelect
+							ref="departmentIds"
+							collection="Departments"
+							display="name"
+							value="_id"
+							selectedItems={this.data.category.departmentIds} />
+					</div>
 				</div>
-				<h4>Departments</h4>
-				<div className="scroll-list">
-					<CollectionListSelect
-						ref="departmentIds"
-						collection="Departments"
-						display="name"
-						value="_id"
-						selectedItems={this.data.category.departmentIds} />
+				<div className="col-md-8 col-md-pull-4">
+					<h4>Description</h4>
+					<div className="well">
+						<ContentEditable
+							ref="description"
+							display={this.data.category.description} />
+					</div>
 				</div>
-				<input type="submit" value="Save Changes" onClick={this.saveUpdates} />
+				<input className="col-xs-12" type="submit" value="Save Changes" onClick={this.saveUpdates} />
 			</div>
 		)
 	}
