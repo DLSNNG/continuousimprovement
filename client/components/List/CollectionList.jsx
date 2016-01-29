@@ -4,7 +4,8 @@ CollectionList = React.createClass({
 		subscribeTo: React.PropTypes.string,
 		collection: React.PropTypes.string,
 		display: React.PropTypes.string,
-		baseURL: React.PropTypes.string
+		baseURL: React.PropTypes.string,
+		query: React.PropTypes.object
 	},
 
 	mixins: [ReactMeteorData],
@@ -12,7 +13,7 @@ CollectionList = React.createClass({
 	getMeteorData() {
 		Meteor.subscribe(this.props.subscribeTo || this.props.collection.toLowerCase());
 		return {
-			collection: Collections[this.props.collection].find({}).fetch()
+			collection: Collections[this.props.collection].find(this.props.query || {}).fetch()
 		}
 	},
 

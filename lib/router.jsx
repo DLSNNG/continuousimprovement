@@ -34,6 +34,12 @@ FlowRouter.route('/tickets', {
 	}
 });
 
+FlowRouter.route('/tickets/search', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { content: <TicketSearch /> });
+	}
+});
+
 FlowRouter.route('/tickets/:ticketId', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { content: <TicketDetails ticketId={params.ticketId} /> });
