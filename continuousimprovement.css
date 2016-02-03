@@ -78,3 +78,35 @@ div:hover > .hover-show {
 		left: 10px;
 	}
 }
+
+/* The animation code */
+@keyframes modal {
+    from {
+    	opacity: 0;
+    	top: -50%;
+    }
+    to {
+    	opacity: 100;
+    	top: 0%;
+    }
+}
+
+@keyframes row {
+    from {
+    	opacity: 0;
+    }
+    to {
+    	opacity: 100;
+    }
+}
+
+/* The element to apply the animation to */
+.modal-transition {
+	animation-name: modal;
+	animation-duration: .3s;
+}
+
+tr.row-transition {
+	animation-name: row;
+	animation-duration: .5s;
+}

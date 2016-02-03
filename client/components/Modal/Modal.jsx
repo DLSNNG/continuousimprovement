@@ -27,7 +27,7 @@ Modal = React.createClass({
 
 	renderModalShown: function() {
 		return (
-			<div style={this.backgroundStyle} onClick={this.props.hideModal}>
+			<div style={this.backgroundStyle} onClick={this.props.hideModal} className="modal-transition">
 				<div className="react-modal" onClick={this.clickModal}>
 					<div style={this.rowStyle}>
 						<span className="glyphicon glyphicon-remove" onClick={this.props.hideModal}></span>

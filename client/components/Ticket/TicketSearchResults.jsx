@@ -47,15 +47,31 @@ TicketSearchResults = React.createClass({
 	},
 
 	render() {
-		var that = this;
+		var tickets = this.data.tickets.map(function(item, i) {
+			return (
+				<tr key={i} className="row-transition">
+					<td><a href={this.props.baseURL+item._id}>{item.title}</a></td>
+					<td>
+						<CollectionField
+							collection="Users"
+							_id={item.createdBy}
+							display="username" />
+					</td>
+					<td>
+						<CollectionField
+							collection="TicketStatusOptions"
+							_id={item.currentStatusId}
+							display="name" />
+					</td>
+				</tr>
+			)
+		}.bind(this));
 		return (
 			<div className="table-responsive">
 				<table className="table">
-					{that.renderHeaders()}
+					{this.renderHeaders()}
 					<tbody>
-						{that.data.tickets.map(function(ticket) {
-							return that.renderItem(ticket);
-						})}
+						{tickets}
 					</tbody>
 				</table>
 			</div>

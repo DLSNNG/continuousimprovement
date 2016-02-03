@@ -35,13 +35,31 @@ TicketSearch = React.createClass({
 		if(endDate) { dateRange['$lte'] = moment(endDate).format('M/D/YYYY') }
 		if(startDate || endDate) { newQuery['createdDate'] = dateRange }
 		this.setState({ query: newQuery });
+		this.setState({ assignedToIds: assignedToIds });
+		this.setState({ categoryIds: categoryIds });
+		this.setState({ statusIds: statusIds });
+		this.setState({ startDate: startDate });
+		this.setState({ endDate: endDate });
+	},
+
+	updateStartDate(event) {
+		this.setState({ startDate: event.target.value });
+		this.updateQueryParams();
+	},
+
+	updateEndDate(event) {
+		this.setState({ endDate: event.target.value });
+		this.updateQueryParams();
+	},
+
+	componentWillUnmount() {
 		//persist throughout session
-		Session.set("assignedToIds", assignedToIds);
-		Session.set("categoryIds", categoryIds);
-		Session.set("statusIds", statusIds);
-		Session.set("startDate", startDate);
-		Session.set("endDate", endDate);
-		Session.set("query", JSON.stringify(newQuery));
+		Session.set("assignedToIds", this.state.assignedToIds);
+		Session.set("categoryIds", this.state.categoryIds);
+		Session.set("statusIds", this.state.statusIds);
+		Session.set("startDate", this.state.startDate);
+		Session.set("endDate", this.state.endDate);
+		Session.set("query", JSON.stringify(this.state.query));
 	},
 
 	render() {
@@ -86,7 +104,8 @@ TicketSearch = React.createClass({
 					<div className="input-group">
 						<input 
 							ref="startDate" 
-							onChange={this.updateQueryParams} 
+							value={this.state.startDate}
+							onChange={this.updateStartDate} 
 							className="form-control" 
 							type="date" 
 							id="start-date" />
@@ -95,7 +114,8 @@ TicketSearch = React.createClass({
 					<div className="input-group">
 						<input 
 							ref="endDate" 
-							onChange={this.updateQueryParams} 
+							value={this.state.endDate}
+							onChange={this.updateEndDate} 
 							className="form-control" 
 							type="date" 
 							id="end-date" />
