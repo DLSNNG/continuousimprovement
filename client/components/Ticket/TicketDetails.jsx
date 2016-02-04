@@ -35,19 +35,17 @@ TicketDetails = React.createClass({
 		var doc = this.data.ticket;
 		var ticket = new Models.Ticket(doc);
 		var status = ticket.remove();
-		if(status.passes) { FlowRouter.go('/tickets'); }
+		if(status.passes) { FlowRouter.go('/tickets'); this.setErrorText("Deleted Ticket"); }
 		else { this.setErrorText(status.error); }
 
 	},
 
 	setErrorText(text) {
-		var error = ReactDOM.findDOMNode(this.refs.errorText);
-			error.innerHTML = text;
+		Session.set("error-message", text);
 	},
 
 	setSuccessText(text) {
-		var success = ReactDOM.findDOMNode(this.refs.successText);
-			success.innerHTML = text;
+		Session.set("success-message", text);
 	},
 
 	render() {

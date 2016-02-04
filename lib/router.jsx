@@ -64,3 +64,9 @@ FlowRouter.route('/users', {
 		ReactLayout.render(MainLayout, { content: <AddUsersPage /> });
 	}
 });
+
+FlowRouter.route('/notifications', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { content: <NotificationFrame /> });
+	}
+});

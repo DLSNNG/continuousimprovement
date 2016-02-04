@@ -100,6 +100,22 @@ div:hover > .hover-show {
     }
 }
 
+@keyframes notification-enter {
+    0% {
+    	top: -50px;
+    	opacity:100;
+    }
+    25% {
+    	top: 0px;
+    	opacity: 100;
+    }
+    100% {
+    	opacity: 0;
+    	top: 0px;
+    }
+}
+
+
 /* The element to apply the animation to */
 .modal-transition {
 	animation-name: modal;
@@ -109,4 +125,42 @@ div:hover > .hover-show {
 tr.row-transition {
 	animation-name: row;
 	animation-duration: .5s;
+}
+
+.success-message, .error-message {
+	position: fixed;
+	top: -100px;
+	left: 10%;
+	width: 80%;
+	height: auto;
+	min-height: 50px;
+	text-align: center;
+	font-size: 24px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 3px solid #939E90;
+	border-top: none;
+	border-radius: 0px 0px 50px 50px;
+	color: #66756A;
+	text-shadow: 1px 1px 5px #fff;
+	opacity: 0;
+}
+
+.success-message {
+	background-color: #50FA78;
+}
+
+.error-message {
+	background-color: red;
+}
+
+.entering {
+	animation-name: notification-enter;
+	animation-duration: 3s;
+}
+
+@media(max-width: 400px) {
+	.success-message {
+		font-size: 18px;
+	}
 }
