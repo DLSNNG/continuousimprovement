@@ -1,11 +1,12 @@
 AddTicketForm = React.createClass({
 	addTicket(e) {
 		e.preventDefault();
-		console.log("added ticket");
+		console.log("added ticket", Meteor.userId());
 		var doc = {
 			title: ReactDOM.findDOMNode(this.refs.ticketTitle).value.trim(),
 			description: ReactDOM.findDOMNode(this.refs.ticketDescription).value.trim(),
-			categoryIds: this.refs.categoryList.getSelected()
+			categoryIds: this.refs.categoryList.getSelected(),
+			createdBy: Meteor.userId()
 		}
 		var ticket = new Models.Ticket(doc);
 		var status = ticket.save();

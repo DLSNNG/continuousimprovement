@@ -30,18 +30,16 @@ CategoryDetails = React.createClass({
 		var doc = this.data.category;
 		var category = new Models.Category(doc);
 		var status = category.remove();
-		if(status.passes) { FlowRouter.go('/categories'); }
+		if(status.passes) { FlowRouter.go('/categories'); this.setErrorText("Deleted Category");}
 		else { this.setErrorText(status.error); }
 	},
 
 	setErrorText(text) {
-		var error = ReactDOM.findDOMNode(this.refs.errorText);
-			error.innerHTML = text;
+		Notifier.addError(text, 5000);
 	},
 
 	setSuccessText(text) {
-		var success = ReactDOM.findDOMNode(this.refs.successText);
-			success.innerHTML = text;
+		Notifier.addSuccess(text, 5000);
 	},
 
 	render() {

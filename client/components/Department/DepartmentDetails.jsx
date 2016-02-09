@@ -16,7 +16,8 @@ DepartmentDetails = React.createClass({
 		var doc = {
 			_id: this.data.department._id,
 			name: this.refs.name.getValue().trim(),
-			members: this.refs.members.getSelected()
+			members: this.refs.members.getSelected(),
+			managers: this.refs.managers.getSelected()
 		}
 
 		var department = new Models.Department(doc);
@@ -29,18 +30,16 @@ DepartmentDetails = React.createClass({
 		var doc = this.data.department;
 		var department = new Models.Department(doc);
 		var status = department.remove();
-		if(status.passes) { FlowRouter.go('/departments'); }
+		if(status.passes) { FlowRouter.go('/departments'); this.setErrorText("Deleted Department");}
 		else { this.setErrorText(status.error); }
 	},
 
 	setErrorText(text) {
-		var error = ReactDOM.findDOMNode(this.refs.errorText);
-			error.innerHTML = text;
+		Notifier.addError(text, 5000);
 	},
 
 	setSuccessText(text) {
-		var success = ReactDOM.findDOMNode(this.refs.successText);
-			success.innerHTML = text;
+		Notifier.addSuccess(text, 5000);
 	},
 
 	render() {
@@ -67,6 +66,15 @@ DepartmentDetails = React.createClass({
 						display="username"
 						value="_id"
 						selectedItems={this.data.department.members} />
+				</div>
+				<h4>Managers</h4>
+				<div className="scroll-list">
+					<CollectionListSelect
+						ref="managers"
+						collection="Users"
+						display="username"
+						value="_id"
+						selectedItems={this.data.department.managers} />
 				</div>
 				<input type="submit" value="Save Changes" onClick={this.saveUpdates} />
 			</div>

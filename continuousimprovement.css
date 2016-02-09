@@ -126,6 +126,7 @@ tr.row-transition {
 	position: fixed;
 	right: 10px;
 	bottom: 10px;
+	z-index: 1000;
 }
 
 .notification {
@@ -143,4 +144,8 @@ tr.row-transition {
 
 .success {
 	background-color: #50FA78;
+}
+
+.error {
+	background-color: #E36352;
 }

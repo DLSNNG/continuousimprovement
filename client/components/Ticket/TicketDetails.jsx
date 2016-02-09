@@ -1,5 +1,7 @@
 TicketDetails = React.createClass({
 
+	//need to create date-picker component to facilitate due date.
+
 	propTypes: {
 		ticketId: React.PropTypes.string		
 	},
@@ -15,11 +17,13 @@ TicketDetails = React.createClass({
 	saveUpdates() {
 		//need to add a few more fields
 		console.log(this.refs.ticketStatusId.getValue());
+		console.log("created by", this.data.ticket.createdBy);
 		var doc = {
 			_id: this.data.ticket._id,
 			title: this.refs.title.getValue().trim(),
 			description: this.refs.description.getValue().trim(),
 			createdDate: this.data.ticket.createdDate,
+			createdBy: this.data.ticket.createdBy,
 			categoryIds: this.refs.categoryIds.getSelected(),
 			assignedToIds: this.refs.assignedToIds.getSelected(),
 			currentStatusId: this.refs.ticketStatusId.getValue()
@@ -41,16 +45,14 @@ TicketDetails = React.createClass({
 	},
 
 	setErrorText(text) {
-		Session.set("error-message", text);
+		Notifier.addError(text, 5000);
 	},
 
 	setSuccessText(text) {
-		Session.set("success-message", text);
+		Notifier.addSuccess(text, 5000);
 	},
 
 	render() {
-		//need to refactor error/success texts later to be its own component,
-		//and add moment for dates
 		return (
 			<div className="container">
 				<ModalDelete
