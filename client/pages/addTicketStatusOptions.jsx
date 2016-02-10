@@ -5,6 +5,7 @@ AddTicketStatusOptionsPage = React.createClass({
 				<AddTicketStatusOptionForm />
 				<CollectionList
 					collection="TicketStatusOptions"
+					subscribeTo="ticketStatusOptions"
 					display="name" 
 					baseURL="/ticketStatusOptions/" />
 			</div>

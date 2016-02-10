@@ -18,8 +18,9 @@ CollectionListSelect = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData() {
-		Meteor.subscribe(this.props.subscribeTo || this.props.collection.toLowerCase());
+		var handle = Meteor.subscribe(this.props.subscribeTo || this.props.collection.toLowerCase());
 		return {
+			loading: !handle.ready(),
 			collection: Collections[this.props.collection].find({}).fetch()
 		}
 	},
@@ -53,16 +54,21 @@ CollectionListSelect = React.createClass({
 	},
 
 	render() {
-		return (
-			<ListSelect 
-				items={this.data.collection}
-				keyToUse="_id"
-				display={this.props.display}
-				value={this.props.value}
-				selectedItems={this.state.selectedItems}
-				selectItem={this.selectItem}
-				isSelected={this.isSelected} 
-				searchString={this.props.searchString || null} />
-		)
+		if(this.data.loading) {
+			return <LoadingSpinner />;
+		}
+		else {
+			return (
+				<ListSelect 
+					items={this.data.collection}
+					keyToUse="_id"
+					display={this.props.display}
+					value={this.props.value}
+					selectedItems={this.state.selectedItems}
+					selectItem={this.selectItem}
+					isSelected={this.isSelected} 
+					searchString={this.props.searchString || null} />
+			)
+		}	
 	}
 });

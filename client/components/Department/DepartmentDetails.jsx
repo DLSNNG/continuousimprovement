@@ -7,6 +7,7 @@ DepartmentDetails = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData() {
+		Meteor.subscribe("departments");
 		return {
 			department: Collections.Departments.findOne({ _id: this.props.departmentId })
 		}

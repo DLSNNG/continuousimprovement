@@ -11,14 +11,18 @@ CollectionField = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData() {
-		Meteor.subscribe(this.props.subscribeTo || this.props.collection.toLowerCase());
-		console.log("id", this.props._id);
+		var handle = Meteor.subscribe(this.props.subscribeTo || this.props.collection.toLowerCase());
 		return {
+			loading: !handle.ready(),
 			doc: Collections[this.props.collection].findOne({ _id: this.props._id})
 		}
 	},
 
 	render() {
+		if(this.data.loading) {
+			console.log("test");
+			return <LoadingSpinner />;
+		}
 		if(!this.data.doc) {
 			return (
 				<div className="bg-danger">Not found</div>

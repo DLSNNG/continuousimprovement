@@ -9,6 +9,7 @@ TicketSearchResults = React.createClass({
 
 	getMeteorData() {
 		Meteor.subscribe("tickets");
+		Meteor.subscribe("ticketStatusOptions");
 		return {
 			tickets: Collections.Tickets.find(this.props.query || {}).fetch()
 		}
@@ -20,6 +21,8 @@ TicketSearchResults = React.createClass({
 				<tr>
 					<th>Title</th>
 					<th>Added By</th>
+					<th>Created on</th>
+					<th>Due by</th>
 					<th>Status</th>
 				</tr>
 			</thead>
@@ -58,8 +61,15 @@ TicketSearchResults = React.createClass({
 							display="username" />
 					</td>
 					<td>
+						{moment(item.createdDate).format("MM/DD/YYYY")}
+					</td>
+					<td>
+						{item.dueDate ? moment(item.dueDate).format("MM/DD/YYYY") : ""}
+					</td>
+					<td>
 						<CollectionField
 							collection="TicketStatusOptions"
+							subscribeTo="ticketStatusOptions"
 							_id={item.currentStatusId}
 							display="name" />
 					</td>

@@ -7,6 +7,7 @@ TicketStatusOptionDetails = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData() {
+		Meteor.subscribe("ticketStatusOptions");
 		return {
 			ticketStatusOption: Collections.TicketStatusOptions.findOne({ _id: this.props.ticketStatusOptionId })
 		}

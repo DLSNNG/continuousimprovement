@@ -7,6 +7,7 @@ CategoryDetails = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData() {
+		Meteor.subscribe("categories");
 		return {
 			category: Collections.Categories.findOne({ _id: this.props.categoryId })
 		}

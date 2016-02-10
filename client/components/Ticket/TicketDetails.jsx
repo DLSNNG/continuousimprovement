@@ -9,15 +9,16 @@ TicketDetails = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData() {
+		var handle = Meteor.subscribe("tickets");
 		return {
+			loading: !handle.ready(),
 			ticket: Collections.Tickets.findOne({ _id: this.props.ticketId })
 		}
 	},
 
 	saveUpdates() {
 		//need to add a few more fields
-		console.log(this.refs.ticketStatusId.getValue());
-		console.log("created by", this.data.ticket.createdBy);
+		console.log("duedate", this.refs.dueDate.getSelected());
 		var doc = {
 			_id: this.data.ticket._id,
 			title: this.refs.title.getValue().trim(),
@@ -25,6 +26,7 @@ TicketDetails = React.createClass({
 			createdDate: this.data.ticket.createdDate,
 			createdBy: this.data.ticket.createdBy,
 			categoryIds: this.refs.categoryIds.getSelected(),
+			dueDate: this.refs.dueDate.getSelected(),
 			assignedToIds: this.refs.assignedToIds.getSelected(),
 			currentStatusId: this.refs.ticketStatusId.getValue()
 		}
@@ -52,7 +54,7 @@ TicketDetails = React.createClass({
 		Notifier.addSuccess(text, 5000);
 	},
 
-	render() {
+	renderTicket() {
 		return (
 			<div className="container">
 				<ModalDelete
@@ -72,9 +74,14 @@ TicketDetails = React.createClass({
 					<CollectionDropdown
 						ref="ticketStatusId"
 						collection="TicketStatusOptions"
+						subscribeTo="ticketStatusOptions"
 						display="name"
 						value="_id"
 						selected={this.data.ticket.currentStatusId} />
+					<h4>Due date</h4>
+					<DateSelect 
+						ref="dueDate"
+						selected={this.data.ticket.dueDate} />
 					<h4>Assigned to</h4>
 					<div className="scroll-list">
 						<CollectionListSelect
@@ -116,5 +123,13 @@ TicketDetails = React.createClass({
 				<input className="col-xs-12" type="submit" value="Save Changes" onClick={this.saveUpdates} />
 			</div>
 		)
+	},
+	render() {
+		if(this.data.loading) {
+			return <LoadingSpinner />
+		}
+		else {
+			return this.renderTicket()
+		}
 	}
 });

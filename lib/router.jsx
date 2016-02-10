@@ -40,6 +40,18 @@ FlowRouter.route('/tickets/search', {
 	}
 });
 
+FlowRouter.route('/tickets/myTickets', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { content: <MyTickets /> });
+	}
+});
+
+FlowRouter.route('/tickets/myAssignments', {
+	action: function(params) {
+		ReactLayout.render(MainLayout, { content: <MyAssignments /> });
+	}
+});
+
 FlowRouter.route('/tickets/:ticketId', {
 	action: function(params) {
 		ReactLayout.render(MainLayout, { content: <TicketDetails ticketId={params.ticketId} /> });

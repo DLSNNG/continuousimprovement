@@ -94,6 +94,7 @@ TicketSearch = React.createClass({
 							selectedItems={this.state.statusIds}
 							ref="statusIds"
 							collection="TicketStatusOptions"
+							subscribeTo="ticketStatusOptions"
 							display="name"
 							value="_id" />
 					</div>

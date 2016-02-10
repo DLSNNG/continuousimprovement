@@ -29,6 +29,7 @@ AddCategoryForm = React.createClass({
 						type="text"
 						ref="catDescription"
 						placeholder="Category Description" />
+					<div ref="errorText" className="bg-danger"></div>
 					<div className="scroll-list">
 						<CollectionListSelect
 							ref="departmentIds"
@@ -39,7 +40,6 @@ AddCategoryForm = React.createClass({
 					<input
 						type="submit"
 						value="Add Category" />
-					<div ref="errorText" className="bg-danger"></div>
 				</form>
 			</div>
 		)
