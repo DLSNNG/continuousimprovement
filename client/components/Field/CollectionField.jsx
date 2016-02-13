@@ -20,7 +20,6 @@ CollectionField = React.createClass({
 
 	render() {
 		if(this.data.loading) {
-			console.log("test");
 			return <LoadingSpinner />;
 		}
 		if(!this.data.doc) {

@@ -117,7 +117,7 @@ TicketDetails = React.createClass({
 					</div>
 					<h4>Created on</h4>
 					<div className="well">
-						{this.data.ticket.createdDate.toString()}
+						{moment(this.data.ticket.createdDate).format('M/D/YYYY')}
 					</div>
 				</div>
 				<input className="col-xs-12" type="submit" value="Save Changes" onClick={this.saveUpdates} />

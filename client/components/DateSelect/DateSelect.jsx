@@ -18,7 +18,7 @@ DateSelect = React.createClass({
 	},
 
 	getSelected() {
-		var date = moment(this.state.date).format("MM/DD/YYYY");
+		var date = moment(this.state.date).toDate();
 		return date;
 	},
 

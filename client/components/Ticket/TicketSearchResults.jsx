@@ -11,19 +11,53 @@ TicketSearchResults = React.createClass({
 		Meteor.subscribe("tickets");
 		Meteor.subscribe("ticketStatusOptions");
 		return {
-			tickets: Collections.Tickets.find(this.props.query || {}).fetch()
+			tickets: Collections.Tickets.find(this.props.query || {}, this.state.sortBy || {}).fetch()
 		}
+	},
+
+	getInitialState() {
+		return {
+			sortBy: { sort: {dueDate: 1} }
+		}
+	},
+
+	sortBy(property) {
+		var oldSort = this.state.sortBy;
+		var direction = oldSort.sort[property] ? oldSort.sort[property] * -1 : 1;
+		var sort = {};
+			sort[property] = direction;
+		this.setState({ sortBy: { sort: sort } });
+	},
+
+	sortByTitle() {
+		this.sortBy('title');
+	},
+
+	sortByCreatedBy() {
+		this.sortBy('createdBy');
+	},
+
+	sortByCreatedDate() {
+		this.sortBy('createdDate');
+	},
+
+	sortByDueDate() {
+		this.sortBy('dueDate');
+	},
+
+	sortByCurrentStatusId() {
+		this.sortBy('currentStatusId');
 	},
 
 	renderHeaders() {
 		return (
 			<thead>
 				<tr>
-					<th>Title</th>
-					<th>Added By</th>
-					<th>Created on</th>
-					<th>Due by</th>
-					<th>Status</th>
+					<th onClick={this.sortByTitle}>Title</th>
+					<th onClick={this.sortByCreatedBy}>Added By</th>
+					<th onClick={this.sortByCreatedDate}>Created on</th>
+					<th onClick={this.sortByDueDate}>Due by</th>
+					<th onClick={this.sortByCurrentStatusId}>Status</th>
 				</tr>
 			</thead>
 		)
